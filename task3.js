@@ -8,7 +8,6 @@ if (c == 0) // обработаем крайний случай
 }
 
 
-
 var hours = ~~(c / 3600) // количество часов
 var minutes = ~~(c / 60) - 60*hours // количество минут
 var seconds = c%60 // количество секунд
@@ -21,6 +20,7 @@ var output = "" //+ " " + minutes.toString() + " " + seconds.toString()
 // часа -- оканчивается на 2, 3, 4, кроме 12 13 14 
 // часов все остальное
 if (hours > 0)
+{
 	output += hours.toString()
 	if ((hours != 11) && ((hours % 10) == 1) ){
 	  output += " час ";
@@ -29,11 +29,12 @@ if (hours > 0)
 	} else {
 	  output += " часов ";
 	}
-
+}
 // минуты -- оканчивается на 2,3,4 кроме 12 13 14
 // минута -- оканчивается на 1, кроме 11
 // минут -- все остальное
-if (minutes > 0)
+if  ((hours > 0 ) || (minutes > 0))
+{
 	output += minutes.toString()
 	if ((minutes != 11) && ((minutes % 10) == 1) ){
 	  output += " минута ";
@@ -42,18 +43,18 @@ if (minutes > 0)
 	} else {
 	  output += " минут ";
 	}
-
+}
 // секунда -- оканчивается на 1 кроме 11 
 // секунды -- оканчивается на 2 3 4 кроме 12 13 14
 // секунд -- все остальное
-if (seconds > 0)
-	output += minutes.toString()
-	if ((minutes != 11) && ((minutes % 10) == 1) ){
-	  output += " секунда ";
-	} else if (([2, 3, 4].includes(minutes % 10)) && (!([12, 13, 14].includes(minutes)))){
-	  output += " секунды ";
-	} else {
-	  output += " секунд ";
-	}
+// if (seconds > 0)
+output += seconds.toString()
+if ((seconds != 11) && ((seconds % 10) == 1) ){
+  output += " секунда";
+} else if (([2, 3, 4].includes(seconds % 10)) && (!([12, 13, 14].includes(seconds)))){
+  output += " секунды";
+} else {
+  output += " секунд";
+}
 
 process.stdout.write(output)
