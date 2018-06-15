@@ -3,7 +3,7 @@ var b = parseInt(process.argv[3]) // приводим к нижнему реги
 var c = a+b
 if (c == 0) // обработаем крайний случай
 {
-	process.stdout.write("0 секунд")
+	// process.stdout.write("÷0 секунд")
 	return;
 }
 
@@ -33,7 +33,7 @@ if (hours > 0)
 // минуты -- оканчивается на 2,3,4 кроме 12 13 14
 // минута -- оканчивается на 1, кроме 11
 // минут -- все остальное
-if  ((hours > 0 ) || (minutes > 0))
+if  ((minutes > 0))
 {
 	output += minutes.toString()
 	if ((minutes != 11) && ((minutes % 10) == 1) ){
@@ -48,13 +48,16 @@ if  ((hours > 0 ) || (minutes > 0))
 // секунды -- оканчивается на 2 3 4 кроме 12 13 14
 // секунд -- все остальное
 // if (seconds > 0)
-output += seconds.toString()
-if ((seconds != 11) && ((seconds % 10) == 1) ){
-  output += " секунда";
-} else if (([2, 3, 4].includes(seconds % 10)) && (!([12, 13, 14].includes(seconds)))){
-  output += " секунды";
-} else {
-  output += " секунд";
+if (seconds > 0)
+{
+	output += seconds.toString()
+	if ((seconds != 11) && ((seconds % 10) == 1) ){
+	  output += " секунда";
+	} else if (([2, 3, 4].includes(seconds % 10)) && (!([12, 13, 14].includes(seconds)))){
+	  output += " секунды";
+	} else {
+	  output += " секунд";
+	}
 }
 
 process.stdout.write(output)
